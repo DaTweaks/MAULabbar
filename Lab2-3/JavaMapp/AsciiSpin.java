@@ -1,47 +1,55 @@
-// Source code is decompiled from a .class file using FernFlower decompiler.
-
 import java.util.Scanner;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.RecursiveTask;
 
 public class AsciiSpin {
  
-    public static void main(String[] args) {
-        CompletableFuture<Void> future = CompletableFuture.runAsync(() -> SpinningLine(200));
+   public static void main(String[] args) {
+      CompletableFuture<Void> future = CompletableFuture.runAsync(() -> SpinningLine(200));
 
-        var scanner = new Scanner(System.in);
+      Scanner scanner = new Scanner(System.in);
 
-        scanner.nextLine(); // Wait for user to press any key to continue.
+      scanner.nextLine();  
 
-        System.out.println("Exiting!");
-    }
+      System.out.println("Exiting!");
+   }
 
-    public static boolean isSpinning = true;
-    public static char[] spinascii = new char[]{'/', '-', '\\', '|', '/', '-', '\\', '|'};
+   public static boolean isSpinning = true;
+
+   public static final String ansiReset = "\u001B[0m";
+
+   public static String[] ansiColors = new String[]{
+      "\u001B[31m",
+      "\u001B[32m",
+      "\u001B[33m",
+      "\u001B[34m",
+      "\u001B[35m",
+      "\u001B[36m",
+      "\u001B[37m"
+   };
+   public static char[] spinAscii = new char[]{'/', '-', '\\', '|'};
  
-    public static void SpinningLine(long frameduration)
-    {
-       for(int i = 0; isSpinning; ++i) {
-          if (i >= spinascii.length) {
-             i = 0;
-          }
- 
-          System.out.print("\033[H\033[2J"); // Clears consoles
-          System.out.flush();
+   public static void SpinningLine(long frameduration)
+   {
+      for(int i = 0; isSpinning; ++i){
+         if (i >= ansiColors.length) {
+            i = 0;
+         }
+         for(int j = 0; j < spinAscii.length; ++j) {
 
-          System.out.print(spinascii[i]);
+            System.out.print("\033[H\033[2J");
+            System.out.flush();
+   
+            System.out.println(ansiColors[i]+spinAscii[j]+"\nPress enter to exit."+ansiReset);
+   
+            try {
+               Thread.sleep(frameduration);
+            } catch (Exception e) {
+            }
+         }
+      }
+   }
 
-          try {
-            Thread.sleep(frameduration);
-          } catch (Exception e) {
-            // TODO: handle exception
-          }
-       }
- 
-    }
-
-    public void StopSpinning() {
-       this.isSpinning = false;
-    }
-
- }
+   public void StopSpinning() {
+   }
+}
