@@ -7,11 +7,11 @@ import java.util.concurrent.RecursiveTask;
 public class AsciiSpin {
  
     public static void main(String[] args) {
-        CompletableFuture<Void> future = CompletableFuture.runAsync(() -> SpinningLine(0, 0, 200));
+        CompletableFuture<Void> future = CompletableFuture.runAsync(() -> SpinningLine(200));
 
         var scanner = new Scanner(System.in);
 
-        scanner.nextLine();
+        scanner.nextLine(); // Wait for user to press any key to continue.
 
         System.out.println("Exiting!");
     }
@@ -19,19 +19,17 @@ public class AsciiSpin {
     public static boolean isSpinning = true;
     public static char[] spinascii = new char[]{'/', '-', '\\', '|', '/', '-', '\\', '|'};
  
-    public static void SpinningLine(int x, int y, long frameduration)
+    public static void SpinningLine(long frameduration)
     {
        for(int i = 0; isSpinning; ++i) {
           if (i >= spinascii.length) {
              i = 0;
           }
  
-          System.out.print("\033[H\033[2J");
+          System.out.print("\033[H\033[2J"); // Clears consoles
           System.out.flush();
 
           System.out.print(spinascii[i]);
-
-          // TODO: Wait for the frameduration before continuing
 
           try {
             Thread.sleep(frameduration);
