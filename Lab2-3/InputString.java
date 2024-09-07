@@ -17,7 +17,7 @@ public class InputString {
 
         for (int i : arr) {
             yes.add(i);   
-            System.out.println(i);
+            System.out.println(i+" List length: "+yes.size());
         }
 	}
 }

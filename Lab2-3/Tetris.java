@@ -2,7 +2,13 @@ import java.util.Scanner;
 import java.util.concurrent.CompletableFuture;
 
 public class Tetris {
+
+    public static void Setup(){
+
+    }
+
     public static void main(String[] args) {
+        
         System.out.println(" _______  _______  _______  ______    ___   _______ \r\n" + //
                         "|       ||       ||       ||    _ |  |   | |       |\r\n" + //
                         "|_     _||    ___||_     _||   | ||  |   | |  _____|\r\n" + //
@@ -34,7 +40,40 @@ public class Tetris {
     }
 
     public class ScreenManager{
-        public 
+        public String[] screenBackground =  new String[] {
+            "----------",
+            "----------",
+            "----------",
+            "----------",
+            "----------",
+            "----------",
+            "----------",
+            "----------",
+            "----------",
+            "----------",
+            "----------",
+            "----------",
+            "----------",
+            "----------",
+            "----------",
+        };
+
+        public void StartUpdate(){
+            ConsoleShortcuts.ClearConsole();
+
+            for (String string : screenBackground) {
+                System.out.println(string);
+            }
+            System.out.println(null);
+        }
+    }
+
+    public class InputManager{
+        
+    }
+
+    public class Vector{
+
     }
 
     public class Object{
