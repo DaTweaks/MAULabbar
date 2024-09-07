@@ -24,7 +24,7 @@ public class RagChew {
     public static void main(String[] args) {
         try{
             clientSocket = new DatagramSocket();
-            clientSocket.setBroadcast(true); // Enable broadcasting
+            //clientSocket.setBroadcast(true); // Enable broadcasting
 
             userName = InetAddress.getLocalHost().getHostName();
 
@@ -35,15 +35,11 @@ public class RagChew {
 
         }
 
-
-
         System.out.println("Welcome to Ragchew! (Do not overuse this pls)");
         Printhelp();
 
-        CompletableFuture<Void> userListener = CompletableFuture.runAsync(() -> UserListener());
         CompletableFuture.runAsync(() -> ServerPrinter());
-
-        userListener.join();
+        CompletableFuture.runAsync(() -> UserListener()).join();
     }
 
     public static void Printhelp(){
@@ -92,14 +88,13 @@ try{
 			// Step 2 : create a DatgramPacket to receive the data. 
 			DpReceive = new DatagramPacket(receive, receive.length); 
 
-			// Step 3 : revieve the data in byte buffer. 
 			ds.receive(DpReceive); 
 
             String data = data(receive).toString();
 
-            if(data.contains("</SENDER:"+userName+"/>")){
-                continue;
-            }
+            //if(data.contains("</SENDER:"+userName+"/>")){
+            //    continue;
+            //}
             
 
 			System.out.println(ansiRecieved+data+ansiReset); 
