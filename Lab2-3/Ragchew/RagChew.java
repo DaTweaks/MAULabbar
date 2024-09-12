@@ -86,6 +86,7 @@ public class RagChew {
             if(userInput.equalsIgnoreCase("RES")){
                 CloseServerListener();
                 serverListener = CompletableFuture.runAsync(() -> ServerPrinter());
+                System.out.println(ansiERR+"Server listener reset!"+ansiReset);
                 continue;
             }
 
