@@ -30,4 +30,13 @@ public class test {
         else
         return Fares.fareSenior;
     }
+
+    public static void what(int i){
+        switch(i){
+            case 1:
+            case 2:
+            case 3:
+                return; // BRO NO WAY THIS WORKS???
+        }
+    }
 }
